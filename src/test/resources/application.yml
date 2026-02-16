@@ -1,0 +1,77 @@
+# Server settings
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  error:
+    whitelabel:
+      enabled: false
+  # Always include the stack trace in the error response
+  include-stacktrace: always
+  # Include the exception message
+  include-message: always
+  # Include binding errors (e.g., validation failures)
+  include-binding-errors: always
+  # Use the RFC 7807 Problem Details for HTTP APIs (standard for SB 3.x)
+  problem-details:
+    enabled: true
+
+info:
+  app:
+    name: user-api
+    version: '@project.version@'
+    environment: ${ENVIRONMENT:DEV}
+
+logging:
+  level:
+    com.hw.user.api: debug
+    org.springframework: info
+
+spring:
+  profiles:
+    active: "${info.app.environment}"
+  webflux:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  main:
+    banner-mode: "off"
+    allow-bean-definition-overriding: true
+  datasource:
+    # Liquibase and JPA will use this connection
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: validate # Let Liquibase handle schema, JPA only validates
+    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    enabled: true
+
+  h2:
+    console:
+      # Note: This won't work automatically in WebFlux; see the custom filter below
+      enabled: true
+      path: /h2-console
+# Actuator endpoints exposure
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, info
+  endpoint:
+    health:
+      show-details: always
+
+# Swagger/OpenAPI (springdoc)
+springdoc:
+  api-docs:
+    enabled: true
+    path: /rest/v1/v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /rest/v1/swagger-ui.html

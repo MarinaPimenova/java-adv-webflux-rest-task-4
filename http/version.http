@@ -1,0 +1,9 @@
+GET http://localhost:8080/rest/v1/version
+
+###
+GET http://localhost:8080/rest/v1/swagger-ui.html
+
+###
+GET http://localhost:8080/rest/v1/webjars/swagger-ui/index.html
+
+###

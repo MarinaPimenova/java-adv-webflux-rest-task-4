@@ -1,10 +1,10 @@
-package com.hw.rest;
+package com.hw.user.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class JavaAdvWebfluxRestTask4ApplicationTests {
+class ApplicationTests {
 
     @Test
     void contextLoads() {
