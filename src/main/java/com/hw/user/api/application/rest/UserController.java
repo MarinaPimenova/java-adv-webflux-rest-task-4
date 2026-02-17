@@ -9,26 +9,12 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/rest/v1/users")
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
-
-    @Operation(summary = "Get all users")
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public Mono<List<User>> getUsers() {
-        return userService.findAll();
-    }
-
-    @Operation(summary = "Get user")
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Mono<User> getUser(@PathVariable Long id) {
-        return userService.findById(id);
-    }
 
     @Operation(summary = "Create user")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
