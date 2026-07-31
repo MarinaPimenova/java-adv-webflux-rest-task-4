@@ -1,0 +1,27 @@
+POST http://localhost:8080/rest/v1/users
+Content-Type: application/json
+Accept: application/json
+
+{
+  "user": "user1"
+}
+###
+GET http://localhost:8080/rest/v1/users
+Accept: application/json
+
+###
+GET http://localhost:8080/rest/v1/users/1
+Accept: application/json
+
+###
+PUT http://localhost:8080/rest/v1/users/1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "user": "user2"
+}
+###
+DELETE http://localhost:8080/rest/v1/users/1
+
+###
